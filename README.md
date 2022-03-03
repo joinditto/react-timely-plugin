@@ -1,30 +1,34 @@
 # react-timely
 
-> Load ditto timely scheduler from any site
-
-[![NPM](https://img.shields.io/npm/v/react-timely.svg)](https://www.npmjs.com/package/react-timely) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-## Install
-
-```bash
-npm install --save react-timely
-```
+Load ditto timely scheduler from any ditto sites
 
 ## Usage
 
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from 'react-timely'
-import 'react-timely/dist/index.css'
+import { TimelyProvider, openPopupWidget } from 'react-timely'
 
 class Example extends Component {
+  handleClick() {
+    openPopupWidget({
+      url: 'http://localhost:3001/event/9c6e37e0-662f-4824-81f4-a38fcca2bc75/book',
+      utm: {
+        utmTerm: 'TestTerm',
+        utmCampaign: 'TestCampaign',
+        utmContent: 'TestContent',
+        utmMedium: 'TestMedium',
+        utmSource: 'TestSource'
+      }
+    })
+  }
+
   render() {
-    return <MyComponent />
+    return (
+      <TimelyProvider>
+        <button onClick={handleClick}>Open Timely </button>
+      </TimelyProvider>
+    )
   }
 }
 ```
-
-## License
-
-MIT © [](https://github.com/)

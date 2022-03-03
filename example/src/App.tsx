@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { TimelyProvider, openPopupWidget } from 'react-timely'
-import 'react-timely/dist/index.css'
 
 const App = () => {
   const handleClick = () => {

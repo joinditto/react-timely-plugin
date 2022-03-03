@@ -166,7 +166,13 @@ var TimelyModal = function TimelyModal(_ref) {
         onClick: onClose
       }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement));
     },
-    ariaHideApp: false
+    ariaHideApp: false,
+    onAfterOpen: function onAfterOpen() {
+      return document.body.style.overflow = 'hidden';
+    },
+    onAfterClose: function onAfterClose() {
+      return document.body.style.overflow = 'unset';
+    }
   }, children);
 };
 

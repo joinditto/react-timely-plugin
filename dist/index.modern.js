@@ -133,7 +133,9 @@ const TimelyModal = ({
       style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
       onClick: onClose
     }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement)),
-    ariaHideApp: false
+    ariaHideApp: false,
+    onAfterOpen: () => document.body.style.overflow = 'hidden',
+    onAfterClose: () => document.body.style.overflow = 'unset'
   }, children);
 };
 

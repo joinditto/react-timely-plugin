@@ -133,6 +133,8 @@ const TimelyModal: React.FC<TimelyModalProps> = ({
         </div>
       )}
       ariaHideApp={false}
+      onAfterOpen={() => (document.body.style.overflow = 'hidden')}
+      onAfterClose={() => (document.body.style.overflow = 'unset')}
     >
       {children}
     </ReactModal>

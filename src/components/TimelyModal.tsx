@@ -28,7 +28,7 @@ const customModalStylesMd = {
     transform: 'translateY(-50%) translateX(-50%)',
     width: '80%',
     minWidth: '900px',
-    maxWidth: '1000px',
+    maxWidth: '1060px',
     height: '90%',
     maxHeight: '680px',
     padding: 0,

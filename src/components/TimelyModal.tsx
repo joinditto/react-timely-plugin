@@ -69,7 +69,6 @@ const styles: StylesDictionary = {
     width: '19px',
     height: '19px',
     cursor: 'pointer',
-    background: 'url(../assets/close-icon.svg) no-repeat',
     backgroundSize: 'contain',
     zIndex: 10000
   },
@@ -81,7 +80,6 @@ const styles: StylesDictionary = {
     width: '15px',
     height: '15px',
     cursor: 'pointer',
-    background: 'url(../assets/close-icon.svg) no-repeat',
     backgroundSize: 'contain',
     zIndex: 10000
   }

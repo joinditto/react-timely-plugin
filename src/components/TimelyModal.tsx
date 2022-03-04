@@ -62,24 +62,24 @@ const customModalStylesXs = {
 
 const styles: StylesDictionary = {
   closeButtonMd: {
-    position: 'absolute',
+    position: 'fixed',
     top: '25px',
     right: '25px',
-    color: '#fff',
     width: '19px',
     height: '19px',
     cursor: 'pointer',
+    color: '#fff',
     backgroundSize: 'contain',
     zIndex: 10000
   },
   closeButtonXs: {
-    position: 'absolute',
+    position: 'fixed',
     top: '10px',
     right: '10px',
-    color: '#fff',
     width: '15px',
     height: '15px',
     cursor: 'pointer',
+    color: '#fff',
     backgroundSize: 'contain',
     zIndex: 10000
   }

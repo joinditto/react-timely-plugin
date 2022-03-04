@@ -23,9 +23,8 @@ function _extends() {
 
 function SvgCloseIcon(props) {
   return /*#__PURE__*/createElement("svg", _extends({
-    width: 22,
-    height: 22,
-    xmlns: "http://www.w3.org/2000/svg"
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 22 22"
   }, props), _path || (_path = /*#__PURE__*/createElement("path", {
     d: "M11.192 9.071l7.779-7.778a1.5 1.5 0 012.12 2.121l-7.777 7.778 7.778 7.779a1.5 1.5 0 11-2.121 2.12l-7.779-7.777-7.778 7.778a1.5 1.5 0 11-2.121-2.121l7.778-7.779-7.778-7.778a1.5 1.5 0 012.121-2.121l7.778 7.778z",
     fill: "#FFF"
@@ -80,24 +79,24 @@ const customModalStylesXs = {
 };
 const styles = {
   closeButtonMd: {
-    position: 'absolute',
+    position: 'fixed',
     top: '25px',
     right: '25px',
-    color: '#fff',
     width: '19px',
     height: '19px',
     cursor: 'pointer',
+    color: '#fff',
     backgroundSize: 'contain',
     zIndex: 10000
   },
   closeButtonXs: {
-    position: 'absolute',
+    position: 'fixed',
     top: '10px',
     right: '10px',
-    color: '#fff',
     width: '15px',
     height: '15px',
     cursor: 'pointer',
+    color: '#fff',
     backgroundSize: 'contain',
     zIndex: 10000
   }

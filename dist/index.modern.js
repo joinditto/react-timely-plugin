@@ -110,21 +110,35 @@ const TimelyModal = ({
   onClose,
   children
 }) => {
+  const isBrowser = typeof window !== 'undefined';
   const [viewport, setViewport] = useState({
-    width: document.documentElement.clientWidth,
-    height: document.documentElement.clientHeight
+    width: 0,
+    height: 0
   });
 
   const handleViewportChange = () => {
-    setViewport({
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
-    });
+    if (isBrowser) {
+      setViewport({
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      });
+    }
   };
 
   useEffect(() => {
-    window.addEventListener('resize', handleViewportChange);
-    return () => window.removeEventListener('resize', handleViewportChange);
+    if (isBrowser) {
+      window.addEventListener('resize', handleViewportChange);
+      setViewport({
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      });
+    }
+
+    return () => {
+      if (isBrowser) {
+        window.removeEventListener('resize', handleViewportChange);
+      }
+    };
   }, []);
   return React__default.createElement(ReactModal, {
     isOpen: isOpen,

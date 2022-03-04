@@ -136,25 +136,37 @@ var TimelyModal = function TimelyModal(_ref) {
   var isOpen = _ref.isOpen,
       onClose = _ref.onClose,
       children = _ref.children;
+  var isBrowser = typeof window !== 'undefined';
 
   var _useState = React.useState({
-    width: document.documentElement.clientWidth,
-    height: document.documentElement.clientHeight
+    width: 0,
+    height: 0
   }),
       viewport = _useState[0],
       setViewport = _useState[1];
 
   var handleViewportChange = function handleViewportChange() {
-    setViewport({
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
-    });
+    if (isBrowser) {
+      setViewport({
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      });
+    }
   };
 
   React.useEffect(function () {
-    window.addEventListener('resize', handleViewportChange);
+    if (isBrowser) {
+      window.addEventListener('resize', handleViewportChange);
+      setViewport({
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+      });
+    }
+
     return function () {
-      return window.removeEventListener('resize', handleViewportChange);
+      if (isBrowser) {
+        window.removeEventListener('resize', handleViewportChange);
+      }
     };
   }, []);
   return React__default.createElement(ReactModal, {

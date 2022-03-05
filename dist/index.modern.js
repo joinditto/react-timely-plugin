@@ -347,6 +347,7 @@ const TimelyProvider = ({
 const TimelyIframe = ({
   url,
   utm,
+  embed,
   iframeTitle
 }) => {
   const [loading, showLoader] = useState(true);
@@ -356,7 +357,7 @@ const TimelyIframe = ({
     const hasQueryString = queryStringIndex > -1;
     const queryString = hasQueryString ? url.slice(queryStringIndex + 1) : null;
     const baseUrl = hasQueryString ? url.slice(0, queryStringIndex) : url;
-    const updatedQueryString = [queryString, utm ? Object.keys(utm).map(utmParam => `${utmParam}=${utm[utmParam]}`).join('&') : null].filter(item => item !== null).join('&');
+    const updatedQueryString = [queryString, utm ? Object.keys(utm).map(utmParam => `${utmParam}=${utm[utmParam]}`).join('&') : null, embed ? Object.keys(embed).map(embedProp => `${embedProp}=${embed[embedProp]}`).join('&') : null].filter(item => item !== null).join('&');
     return `${baseUrl}?${updatedQueryString}`;
   };
 

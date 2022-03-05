@@ -11,6 +11,12 @@ type Optional<T extends object> = {
   [P in keyof T]?: T[P]
 }
 
+export type Embed = Optional<{
+  embed_domain: string
+  embed_path: string
+  embed_type: 'popup' | 'inline'
+}>
+
 export type Prefill = Optional<{
   name: string
   email: string
@@ -35,6 +41,7 @@ interface TimelyWidgetProps {
   prefill?: Prefill
   utm?: Utm
   iframeTitle?: IframeTitle
+  embed?: Embed
 }
 
 interface TimelyWidgetState {
@@ -96,6 +103,7 @@ export { TimelyProvider }
 export const TimelyIframe: React.FC<TimelyWidgetProps> = ({
   url,
   utm,
+  embed,
   iframeTitle
 }) => {
   const [loading, showLoader] = useState<boolean>(true)
@@ -111,6 +119,11 @@ export const TimelyIframe: React.FC<TimelyWidgetProps> = ({
       utm
         ? Object.keys(utm)
             .map((utmParam) => `${utmParam}=${utm[utmParam]}`)
+            .join('&')
+        : null,
+      embed
+        ? Object.keys(embed)
+            .map((embedProp) => `${embedProp}=${embed[embedProp]}`)
             .join('&')
         : null
     ]

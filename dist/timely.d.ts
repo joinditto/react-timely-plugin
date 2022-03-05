@@ -2,6 +2,11 @@ import React from 'react';
 declare type Optional<T extends object> = {
     [P in keyof T]?: T[P];
 };
+export declare type Embed = Optional<{
+    embed_domain: string;
+    embed_path: string;
+    embed_type: 'popup' | 'inline';
+}>;
 export declare type Prefill = Optional<{
     name: string;
     email: string;
@@ -23,6 +28,7 @@ interface TimelyWidgetProps {
     prefill?: Prefill;
     utm?: Utm;
     iframeTitle?: IframeTitle;
+    embed?: Embed;
 }
 declare const TimelyProvider: React.FC;
 export { TimelyProvider };

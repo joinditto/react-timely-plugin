@@ -387,6 +387,7 @@ var TimelyProvider = function TimelyProvider(_ref) {
 var TimelyIframe = function TimelyIframe(_ref2) {
   var url = _ref2.url,
       utm = _ref2.utm,
+      embed = _ref2.embed,
       iframeTitle = _ref2.iframeTitle;
 
   var _useState = React.useState(true),
@@ -400,6 +401,8 @@ var TimelyIframe = function TimelyIframe(_ref2) {
     var baseUrl = hasQueryString ? url.slice(0, queryStringIndex) : url;
     var updatedQueryString = [queryString, utm ? Object.keys(utm).map(function (utmParam) {
       return utmParam + "=" + utm[utmParam];
+    }).join('&') : null, embed ? Object.keys(embed).map(function (embedProp) {
+      return embedProp + "=" + embed[embedProp];
     }).join('&') : null].filter(function (item) {
       return item !== null;
     }).join('&');

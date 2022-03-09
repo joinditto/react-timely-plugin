@@ -27,11 +27,11 @@ export type Prefill = Optional<{
 }>
 
 export type Utm = Optional<{
-  utmCampaign: string
-  utmSource: string
-  utmMedium: string
-  utmContent: string
-  utmTerm: string
+  utm_campaign: string
+  utm_source: string
+  utm_medium: string
+  utm_content: string
+  utm_term: string
 }>
 
 export type IframeTitle = string

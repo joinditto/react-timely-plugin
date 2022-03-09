@@ -16,11 +16,11 @@ export declare type Prefill = Optional<{
     date: Date;
 }>;
 export declare type Utm = Optional<{
-    utmCampaign: string;
-    utmSource: string;
-    utmMedium: string;
-    utmContent: string;
-    utmTerm: string;
+    utm_campaign: string;
+    utm_source: string;
+    utm_medium: string;
+    utm_content: string;
+    utm_term: string;
 }>;
 export declare type IframeTitle = string;
 interface TimelyWidgetProps {

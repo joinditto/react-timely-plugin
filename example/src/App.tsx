@@ -7,11 +7,11 @@ const App = () => {
     openPopupWidget({
       url: 'http://localhost:3001/event/9c6e37e0-662f-4824-81f4-a38fcca2bc75/book',
       utm: {
-        utmTerm: 'TestTerm',
-        utmCampaign: 'TestCampaign',
-        utmContent: 'TestContent',
-        utmMedium: 'TestMedium',
-        utmSource: 'TestSource'
+        utm_term: 'TestTerm',
+        utm_campaign: 'TestCampaign',
+        utm_content: 'TestContent',
+        utm_medium: 'TestMedium',
+        utm_source: 'TestSource'
       },
       embed: {
         embed_domain: url.hostname,

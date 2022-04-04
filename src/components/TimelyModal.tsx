@@ -49,13 +49,15 @@ const customModalStylesXs = {
     backgroundColor: 'rgba(31,31,31,0.4)'
   },
   content: {
-    top: 0,
+    top: 40,
     left: 0,
+    bottom: 0,
+    right: 0,
     width: '100%',
     padding: 0,
     background: 'transparent',
     border: 'none',
-    overflow: 'hidden',
+    overflow: 'scroll',
     inset: '50px 0 0 0'
   }
 }

@@ -48,8 +48,8 @@ const customModalStylesMd = {
     width: '80%',
     minWidth: '900px',
     maxWidth: '1060px',
-    height: '90%',
-    maxHeight: '680px',
+    height: '100%',
+    maxHeight: '620px',
     padding: 0,
     background: 'transparent',
     border: 'none',
@@ -67,14 +67,41 @@ const customModalStylesXs = {
     backgroundColor: 'rgba(31,31,31,0.4)'
   },
   content: {
-    top: 0,
+    top: 40,
     left: 0,
+    bottom: 0,
+    right: 0,
     width: '100%',
     padding: 0,
     background: 'transparent',
     border: 'none',
-    overflow: 'hidden',
+    overflow: 'scroll',
     inset: '50px 0 0 0'
+  }
+};
+const customModalStylesSm = {
+  overlay: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    overflow: 'hidden',
+    zIndex: '9999',
+    backgroundColor: 'rgba(31,31,31,0.4)'
+  },
+  content: {
+    top: 40,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: '100%',
+    padding: 0,
+    background: 'transparent',
+    border: 'none',
+    overflow: 'scroll',
+    inset: '50px 0px',
+    maxWidth: 660,
+    margin: 'auto'
   }
 };
 const styles = {
@@ -99,6 +126,13 @@ const styles = {
     color: '#fff',
     backgroundSize: 'contain',
     zIndex: 10000
+  },
+  overlay: {
+    width: '100vw',
+    height: '100vh',
+    position: 'absolute',
+    top: 0,
+    left: 0
   }
 };
 
@@ -139,8 +173,11 @@ const TimelyModal = ({
   }, []);
   return React__default.createElement(ReactModal, {
     isOpen: isOpen,
-    style: viewport && viewport.width < 960 ? customModalStylesXs : customModalStylesMd,
-    overlayElement: (props, contentElement) => React__default.createElement("div", null, React__default.createElement("div", {
+    style: viewport && viewport.width < 768 ? customModalStylesXs : viewport && viewport.width < 960 ? customModalStylesSm : customModalStylesMd,
+    overlayElement: (props, contentElement) => React__default.createElement("div", {
+      style: styles.overlay,
+      onClick: onClose
+    }, React__default.createElement("div", {
       style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
       onClick: onClose
     }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement)),

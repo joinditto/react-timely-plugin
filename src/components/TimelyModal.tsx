@@ -29,8 +29,8 @@ const customModalStylesMd = {
     width: '80%',
     minWidth: '900px',
     maxWidth: '1060px',
-    height: '90%',
-    maxHeight: '680px',
+    height: '100%',
+    maxHeight: '620px',
     padding: 0,
     background: 'transparent',
     border: 'none',
@@ -62,6 +62,32 @@ const customModalStylesXs = {
   }
 }
 
+const customModalStylesSm = {
+  overlay: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    overflow: 'hidden',
+    zIndex: '9999',
+    backgroundColor: 'rgba(31,31,31,0.4)'
+  },
+  content: {
+    top: 40,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: '100%',
+    padding: 0,
+    background: 'transparent',
+    border: 'none',
+    overflow: 'scroll',
+    inset: '50px 0px',
+    maxWidth: 660,
+    margin: 'auto'
+  }
+}
+
 const styles: StylesDictionary = {
   closeButtonMd: {
     position: 'fixed',
@@ -84,6 +110,13 @@ const styles: StylesDictionary = {
     color: '#fff',
     backgroundSize: 'contain',
     zIndex: 10000
+  },
+  overlay: {
+    width: '100vw',
+    height: '100vh',
+    position: 'absolute',
+    top: 0,
+    left: 0
   }
 }
 
@@ -127,12 +160,14 @@ const TimelyModal: React.FC<TimelyModalProps> = ({
     <ReactModal
       isOpen={isOpen}
       style={
-        viewport && viewport.width < 960
+        viewport && viewport.width < 768
           ? customModalStylesXs
+          : viewport && viewport.width < 960
+          ? customModalStylesSm
           : customModalStylesMd
       }
       overlayElement={(props, contentElement) => (
-        <div>
+        <div style={styles.overlay} onClick={onClose}>
           <div
             style={
               viewport && viewport.width < 960

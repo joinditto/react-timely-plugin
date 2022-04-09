@@ -11,7 +11,11 @@ const App = () => {
         utm_campaign: 'TestCampaign',
         utm_content: 'TestContent',
         utm_medium: 'TestMedium',
-        utm_source: 'TestSource'
+        utm_source: 'TestSource',
+        ref: 'influencercode',
+        referral_url: encodeURIComponent(
+          'https://test.referralurl.com/influencer?p1=a&p2=b'
+        )
       },
       embed: {
         embed_domain: url.hostname,

@@ -21,6 +21,8 @@ export declare type Utm = Optional<{
     utm_medium: string;
     utm_content: string;
     utm_term: string;
+    ref: string;
+    referral_url: string;
 }>;
 export declare type IframeTitle = string;
 interface TimelyWidgetProps {

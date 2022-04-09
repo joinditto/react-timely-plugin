@@ -32,6 +32,8 @@ export type Utm = Optional<{
   utm_medium: string
   utm_content: string
   utm_term: string
+  ref: string
+  referral_url: string
 }>
 
 export type IframeTitle = string

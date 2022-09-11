@@ -340,6 +340,19 @@ class TimelyWidget extends React__default.Component {
   constructor(props) {
     super(props);
 
+    this.handleMessage = event => {
+      const {
+        data
+      } = event;
+
+      if (data.from === 'timely' && data.action === 'confirm-close') {
+        this.setState({
+          isOpen: false,
+          confirmClose: false
+        });
+      }
+    };
+
     this.show = props => {
       this.setState({
         isOpen: true,
@@ -348,20 +361,50 @@ class TimelyWidget extends React__default.Component {
     };
 
     this.close = () => {
-      this.setState({
-        isOpen: false
-      });
+      if (!this.state.confirmClose) {
+        this.setState({
+          confirmClose: true
+        });
+
+        if (window && window.document) {
+          var _window, _window$document;
+
+          const timelyIframe = (_window = window) === null || _window === void 0 ? void 0 : (_window$document = _window.document) === null || _window$document === void 0 ? void 0 : _window$document.getElementById('timely-iframe');
+
+          if (timelyIframe) {
+            var _timelyIframe$content;
+
+            (_timelyIframe$content = timelyIframe.contentWindow) === null || _timelyIframe$content === void 0 ? void 0 : _timelyIframe$content.postMessage({
+              from: 'react-timely',
+              action: 'close'
+            }, '*');
+          }
+        }
+      } else {
+        this.setState({
+          isOpen: false
+        });
+      }
     };
 
     this.state = {
       isOpen: false,
-      content: null
+      content: null,
+      confirmClose: false
     };
     TimelyWidget.singletonRef = this;
   }
 
   static toggle(props) {
     TimelyWidget.singletonRef.process(props);
+  }
+
+  componentDidMount() {
+    window.addEventListener('message', this.handleMessage, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('message', this.handleMessage);
   }
 
   render() {
@@ -425,6 +468,7 @@ const TimelyIframe = ({
       height: 57
     }
   })), React__default.createElement("iframe", {
+    id: 'timely-iframe',
     src: finalUrl,
     frameBorder: 0,
     width: '100%',

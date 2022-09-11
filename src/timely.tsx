@@ -49,6 +49,7 @@ interface TimelyWidgetProps {
 interface TimelyWidgetState {
   isOpen: boolean
   content: JSX.Element | null
+  confirmClose: boolean
 }
 
 class TimelyWidget extends React.Component<any, TimelyWidgetState> {
@@ -63,10 +64,32 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
 
     this.state = {
       isOpen: false,
-      content: null
+      content: null,
+      confirmClose: false
     }
 
     TimelyWidget.singletonRef = this
+  }
+
+  /**
+   *
+   * @param event
+   */
+  handleMessage = (event: any) => {
+    const { data } = event
+    if (data.from === 'timely' && data.action === 'confirm-close') {
+      this.setState({ isOpen: false, confirmClose: false })
+    }
+  }
+
+  // we have to handle close confirmations from the iframe loaded listening for such a message
+  componentDidMount(): void {
+    window.addEventListener('message', this.handleMessage, false)
+  }
+
+  // free up the event listeners on unmount
+  componentWillUnmount(): void {
+    window.removeEventListener('message', this.handleMessage)
   }
 
   show = (props: TimelyWidgetProps) => {
@@ -77,7 +100,22 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
   }
 
   close = () => {
-    this.setState({ isOpen: false })
+    if (!this.state.confirmClose) {
+      this.setState({ confirmClose: true })
+      if (window && window.document) {
+        const timelyIframe: HTMLIFrameElement | null =
+          window?.document?.getElementById('timely-iframe') as HTMLIFrameElement
+
+        if (timelyIframe) {
+          timelyIframe.contentWindow?.postMessage(
+            { from: 'react-timely', action: 'close' },
+            '*'
+          )
+        }
+      }
+    } else {
+      this.setState({ isOpen: false })
+    }
   }
 
   render() {
@@ -170,6 +208,7 @@ export const TimelyIframe: React.FC<TimelyWidgetProps> = ({
         </div>
       )}
       <iframe
+        id='timely-iframe'
         src={finalUrl}
         frameBorder={0}
         width='100%'

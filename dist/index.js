@@ -379,6 +379,17 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
 
     _this = _React$Component.call(this, props) || this;
 
+    _this.handleMessage = function (event) {
+      var data = event.data;
+
+      if (data.from === 'timely' && data.action === 'confirm-close') {
+        _this.setState({
+          isOpen: false,
+          confirmClose: false
+        });
+      }
+    };
+
     _this.show = function (props) {
       _this.setState({
         isOpen: true,
@@ -387,14 +398,36 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
     };
 
     _this.close = function () {
-      _this.setState({
-        isOpen: false
-      });
+      if (!_this.state.confirmClose) {
+        _this.setState({
+          confirmClose: true
+        });
+
+        if (window && window.document) {
+          var _window, _window$document;
+
+          var timelyIframe = (_window = window) === null || _window === void 0 ? void 0 : (_window$document = _window.document) === null || _window$document === void 0 ? void 0 : _window$document.getElementById('timely-iframe');
+
+          if (timelyIframe) {
+            var _timelyIframe$content;
+
+            (_timelyIframe$content = timelyIframe.contentWindow) === null || _timelyIframe$content === void 0 ? void 0 : _timelyIframe$content.postMessage({
+              from: 'react-timely',
+              action: 'close'
+            }, '*');
+          }
+        }
+      } else {
+        _this.setState({
+          isOpen: false
+        });
+      }
     };
 
     _this.state = {
       isOpen: false,
-      content: null
+      content: null,
+      confirmClose: false
     };
     TimelyWidget.singletonRef = _assertThisInitialized(_this);
     return _this;
@@ -405,6 +438,14 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
   };
 
   var _proto = TimelyWidget.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    window.addEventListener('message', this.handleMessage, false);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    window.removeEventListener('message', this.handleMessage);
+  };
 
   _proto.render = function render() {
     var isOpen = this.state.isOpen;
@@ -473,6 +514,7 @@ var TimelyIframe = function TimelyIframe(_ref2) {
       height: 57
     }
   })), React__default.createElement("iframe", {
+    id: 'timely-iframe',
     src: finalUrl,
     frameBorder: 0,
     width: '100%',

@@ -384,11 +384,17 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
     _this.handleMessage = function (event) {
       var data = event.data;
 
-      if (data.from === 'timely' && data.action === 'confirm-close') {
-        _this.setState({
-          isOpen: false,
-          confirmClose: false
-        });
+      if (data.from === 'timely') {
+        if (data.action === 'confirm-close') {
+          _this.setState({
+            isOpen: false,
+            confirmClose: false
+          });
+        } else if (data.action === 'reset-confirmation') {
+          _this.setState({
+            confirmClose: false
+          });
+        }
       }
     };
 

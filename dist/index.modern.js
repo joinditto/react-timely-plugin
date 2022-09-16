@@ -346,11 +346,17 @@ class TimelyWidget extends React__default.Component {
         data
       } = event;
 
-      if (data.from === 'timely' && data.action === 'confirm-close') {
-        this.setState({
-          isOpen: false,
-          confirmClose: false
-        });
+      if (data.from === 'timely') {
+        if (data.action === 'confirm-close') {
+          this.setState({
+            isOpen: false,
+            confirmClose: false
+          });
+        } else if (data.action === 'reset-confirmation') {
+          this.setState({
+            confirmClose: false
+          });
+        }
       }
     };
 

@@ -9,6 +9,7 @@ export interface StylesDictionary {
 
 interface TimelyModalProps {
   isOpen: boolean
+  closeBtn?: boolean
   onClose: () => void
 }
 
@@ -123,6 +124,7 @@ const styles: StylesDictionary = {
 const TimelyModal: React.FC<TimelyModalProps> = ({
   isOpen,
   onClose,
+  closeBtn = true,
   children
 }) => {
   const isBrowser = typeof window !== 'undefined'
@@ -168,16 +170,18 @@ const TimelyModal: React.FC<TimelyModalProps> = ({
       }
       overlayElement={(props, contentElement) => (
         <div style={styles.overlay} onClick={onClose}>
-          <div
-            style={
-              viewport && viewport.width < 960
-                ? styles.closeButtonXs
-                : styles.closeButtonMd
-            }
-            onClick={onClose}
-          >
-            <CloseIcon />
-          </div>
+          {closeBtn && (
+            <div
+              style={
+                viewport && viewport.width < 960
+                  ? styles.closeButtonXs
+                  : styles.closeButtonMd
+              }
+              onClick={onClose}
+            >
+              <CloseIcon />
+            </div>
+          )}
           <div {...props}>{contentElement}</div>
         </div>
       )}

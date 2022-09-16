@@ -113,8 +113,6 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
           )
         }
       }
-    } else {
-      this.setState({ isOpen: false })
     }
   }
 
@@ -122,7 +120,11 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
     const { isOpen } = this.state
 
     return (
-      <TimelyModal isOpen={isOpen} onClose={this.close}>
+      <TimelyModal
+        isOpen={isOpen}
+        onClose={this.close}
+        closeBtn={!this.state.confirmClose}
+      >
         <Fragment>{this.state.content}</Fragment>
       </TimelyModal>
     )

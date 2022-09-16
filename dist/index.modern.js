@@ -139,6 +139,7 @@ const styles = {
 const TimelyModal = ({
   isOpen,
   onClose,
+  closeBtn: _closeBtn = true,
   children
 }) => {
   const isBrowser = typeof window !== 'undefined';
@@ -177,7 +178,7 @@ const TimelyModal = ({
     overlayElement: (props, contentElement) => React__default.createElement("div", {
       style: styles.overlay,
       onClick: onClose
-    }, React__default.createElement("div", {
+    }, _closeBtn && React__default.createElement("div", {
       style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
       onClick: onClose
     }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement)),
@@ -380,10 +381,6 @@ class TimelyWidget extends React__default.Component {
             }, '*');
           }
         }
-      } else {
-        this.setState({
-          isOpen: false
-        });
       }
     };
 
@@ -413,7 +410,8 @@ class TimelyWidget extends React__default.Component {
     } = this.state;
     return React__default.createElement(TimelyModal, {
       isOpen: isOpen,
-      onClose: this.close
+      onClose: this.close,
+      closeBtn: !this.state.confirmClose
     }, React__default.createElement(Fragment, null, this.state.content));
   }
 

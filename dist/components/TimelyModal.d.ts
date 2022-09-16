@@ -4,6 +4,7 @@ export interface StylesDictionary {
 }
 interface TimelyModalProps {
     isOpen: boolean;
+    closeBtn?: boolean;
     onClose: () => void;
 }
 declare const TimelyModal: React.FC<TimelyModalProps>;

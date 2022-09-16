@@ -166,6 +166,8 @@ var styles = {
 var TimelyModal = function TimelyModal(_ref) {
   var isOpen = _ref.isOpen,
       onClose = _ref.onClose,
+      _ref$closeBtn = _ref.closeBtn,
+      closeBtn = _ref$closeBtn === void 0 ? true : _ref$closeBtn,
       children = _ref.children;
   var isBrowser = typeof window !== 'undefined';
 
@@ -207,7 +209,7 @@ var TimelyModal = function TimelyModal(_ref) {
       return React__default.createElement("div", {
         style: styles.overlay,
         onClick: onClose
-      }, React__default.createElement("div", {
+      }, closeBtn && React__default.createElement("div", {
         style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
         onClick: onClose
       }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement));
@@ -417,10 +419,6 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
             }, '*');
           }
         }
-      } else {
-        _this.setState({
-          isOpen: false
-        });
       }
     };
 
@@ -451,7 +449,8 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
     var isOpen = this.state.isOpen;
     return React__default.createElement(TimelyModal, {
       isOpen: isOpen,
-      onClose: this.close
+      onClose: this.close,
+      closeBtn: !this.state.confirmClose
     }, React__default.createElement(React.Fragment, null, this.state.content));
   };
 

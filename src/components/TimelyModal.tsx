@@ -177,7 +177,10 @@ const TimelyModal: React.FC<TimelyModalProps> = ({
                   ? styles.closeButtonXs
                   : styles.closeButtonMd
               }
-              onClick={onClose}
+              onClick={(e) => {
+                e.stopPropagation()
+                onClose()
+              }}
             >
               <CloseIcon />
             </div>

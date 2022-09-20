@@ -211,7 +211,10 @@ var TimelyModal = function TimelyModal(_ref) {
         onClick: onClose
       }, closeBtn && React__default.createElement("div", {
         style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
-        onClick: onClose
+        onClick: function onClick(e) {
+          e.stopPropagation();
+          onClose();
+        }
       }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement));
     },
     ariaHideApp: false,
@@ -406,7 +409,7 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
     };
 
     _this.close = function () {
-      if (!_this.state.confirmClose) {
+      if (!_this.state.confirmClose && _this.state.isOpen) {
         _this.setState({
           confirmClose: true
         });

@@ -104,7 +104,7 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
   }
 
   close = () => {
-    if (!this.state.confirmClose) {
+    if (!this.state.confirmClose && this.state.isOpen) {
       this.setState({ confirmClose: true })
       if (window && window.document) {
         const timelyIframe: HTMLIFrameElement | null =

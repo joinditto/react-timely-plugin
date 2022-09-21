@@ -2,11 +2,6 @@ import React, { Fragment, useState } from 'react'
 import TimelyModal from './components/TimelyModal'
 import { ReactComponent as Loader } from './assets/loader.svg'
 
-interface TimelyProps {
-  isOpen: boolean
-  onClose?: () => void
-}
-
 type Optional<T extends object> = {
   [P in keyof T]?: T[P]
 }
@@ -54,10 +49,6 @@ interface TimelyWidgetState {
 
 class TimelyWidget extends React.Component<any, TimelyWidgetState> {
   static singletonRef: any
-
-  static toggle(props: TimelyProps) {
-    TimelyWidget.singletonRef.process(props)
-  }
 
   constructor(props: any) {
     super(props)

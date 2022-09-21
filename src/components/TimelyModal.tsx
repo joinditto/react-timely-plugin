@@ -26,7 +26,8 @@ const customModalStylesMd = {
   content: {
     top: '50%',
     left: '50%',
-    transform: 'translateY(-50%) translateX(-50%)',
+    // ideal translateX(-50%) translateY(-50%) changed to avoid blur issue in windows
+    transform: 'translateX(calc(-50% - 2px)) translateY(calc(-50% - 2px))',
     width: '80%',
     minWidth: '900px',
     maxWidth: '1060px',

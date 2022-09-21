@@ -44,7 +44,7 @@ const customModalStylesMd = {
   content: {
     top: '50%',
     left: '50%',
-    transform: 'translateY(-50%) translateX(-50%)',
+    transform: 'translateX(calc(-50% - 2px)) translateY(calc(-50% - 2px))',
     width: '80%',
     minWidth: '900px',
     maxWidth: '1060px',
@@ -399,10 +399,6 @@ class TimelyWidget extends React__default.Component {
       confirmClose: false
     };
     TimelyWidget.singletonRef = this;
-  }
-
-  static toggle(props) {
-    TimelyWidget.singletonRef.process(props);
   }
 
   componentDidMount() {

@@ -229,10 +229,10 @@ const TimelyModal: React.FC<any> = ({
         <div
           style={{
             position: 'fixed',
-            top: '50%',
+            top: viewport.width < 800 ? '60%' : '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 980,
+            width: viewport.width < 800 ? '100%' : 980,
             height: 550
           }}
         >

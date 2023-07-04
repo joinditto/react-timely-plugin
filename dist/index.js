@@ -120,11 +120,11 @@ var TimelyModal = function TimelyModal(_ref) {
   }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", {
     style: {
       position: 'fixed',
-      top: '50%',
+      top: viewport.width < 800 ? '60%' : '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      width: viewport.width < 768 ? 1080 : 980,
-      height: viewport.width < 768 ? 600 : 550
+      width: viewport.width < 800 ? '100%' : 980,
+      height: 550
     }
   }, children));
 };

@@ -66,7 +66,6 @@ const TimelyModal = ({
     };
   }, []);
   return isOpen && React__default.createElement("div", {
-    id: 'myModal',
     style: {
       position: 'fixed',
       zIndex: 1,
@@ -91,10 +90,11 @@ const TimelyModal = ({
   }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", {
     style: {
       position: 'fixed',
-      top: viewport.width < 800 ? '60%' : '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: viewport.width < 800 ? '100%' : 980,
+      bottom: '0%',
+      top: viewport.width < 768 ? undefined : '50%',
+      left: viewport.width < 768 ? undefined : '50%',
+      transform: viewport.width < 768 ? undefined : 'translate(-50%, -50%)',
+      width: viewport.width < 768 ? '100%' : viewport.width < 1124 ? '80%' : 980,
       height: 550
     }
   }, children));

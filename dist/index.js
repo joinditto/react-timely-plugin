@@ -2,7 +2,6 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
-var ReactModal = _interopDefault(require('react-modal'));
 
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
@@ -58,116 +57,9 @@ function SvgCloseIcon(props) {
   })));
 }
 
-var customModalStylesMd = {
-  overlay: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    overflow: 'hidden',
-    zIndex: '9999',
-    backgroundColor: 'rgba(31,31,31,0.4)'
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    transform: 'translateX(calc(-50% - 2px)) translateY(calc(-50% - 2px))',
-    width: '80%',
-    minWidth: '900px',
-    maxWidth: '1060px',
-    height: '100%',
-    maxHeight: '620px',
-    padding: 0,
-    background: 'transparent',
-    border: 'none',
-    overflow: 'hidden'
-  }
-};
-var customModalStylesXs = {
-  overlay: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    overflow: 'hidden',
-    zIndex: '9999',
-    backgroundColor: 'rgba(31,31,31,0.4)'
-  },
-  content: {
-    top: 40,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    width: '100%',
-    padding: 0,
-    background: 'transparent',
-    border: 'none',
-    overflow: 'scroll',
-    inset: '50px 0 0 0'
-  }
-};
-var customModalStylesSm = {
-  overlay: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    overflow: 'hidden',
-    zIndex: '9999',
-    backgroundColor: 'rgba(31,31,31,0.4)'
-  },
-  content: {
-    top: 40,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    width: '100%',
-    padding: 0,
-    background: 'transparent',
-    border: 'none',
-    overflow: 'scroll',
-    inset: '50px 0px',
-    maxWidth: 660,
-    margin: 'auto'
-  }
-};
-var styles = {
-  closeButtonMd: {
-    position: 'fixed',
-    top: '25px',
-    right: '25px',
-    width: '19px',
-    height: '19px',
-    cursor: 'pointer',
-    color: '#fff',
-    backgroundSize: 'contain',
-    zIndex: 10000
-  },
-  closeButtonXs: {
-    position: 'fixed',
-    top: '10px',
-    right: '10px',
-    width: '15px',
-    height: '15px',
-    cursor: 'pointer',
-    color: '#fff',
-    backgroundSize: 'contain',
-    zIndex: 10000
-  },
-  overlay: {
-    width: '100vw',
-    height: '100vh',
-    position: 'absolute',
-    top: 0,
-    left: 0
-  }
-};
-
 var TimelyModal = function TimelyModal(_ref) {
   var isOpen = _ref.isOpen,
       onClose = _ref.onClose,
-      _ref$closeBtn = _ref.closeBtn,
-      closeBtn = _ref$closeBtn === void 0 ? true : _ref$closeBtn,
       children = _ref.children;
   var isBrowser = typeof window !== 'undefined';
 
@@ -202,29 +94,39 @@ var TimelyModal = function TimelyModal(_ref) {
       }
     };
   }, []);
-  return React__default.createElement(ReactModal, {
-    isOpen: isOpen,
-    style: viewport && viewport.width < 768 ? customModalStylesXs : viewport && viewport.width < 960 ? customModalStylesSm : customModalStylesMd,
-    overlayElement: function overlayElement(props, contentElement) {
-      return React__default.createElement("div", {
-        style: styles.overlay,
-        onClick: onClose
-      }, closeBtn && React__default.createElement("div", {
-        style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
-        onClick: function onClick(e) {
-          e.stopPropagation();
-          onClose();
-        }
-      }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement));
-    },
-    ariaHideApp: false,
-    onAfterOpen: function onAfterOpen() {
-      return document.body.style.overflow = 'hidden';
-    },
-    onAfterClose: function onAfterClose() {
-      return document.body.style.overflow = 'unset';
+  return isOpen && React__default.createElement("div", {
+    id: 'myModal',
+    style: {
+      position: 'fixed',
+      zIndex: 1,
+      left: '0',
+      top: '0',
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0,0,0,0.4)'
     }
-  }, children);
+  }, React__default.createElement("button", {
+    style: {
+      background: 'transparent',
+      border: 'none',
+      "float": 'right',
+      marginRight: 15,
+      marginTop: 15,
+      fontWeight: 'bold',
+      width: 30,
+      cursor: 'pointer'
+    },
+    onClick: onClose
+  }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", {
+    style: {
+      position: 'fixed',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: viewport.width < 768 ? 1080 : 980,
+      height: viewport.width < 768 ? 600 : 550
+    }
+  }, children));
 };
 
 var _circle, _circle2, _circle3, _circle4, _circle5;

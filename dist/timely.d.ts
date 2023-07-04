@@ -23,6 +23,7 @@ export declare type Utm = Optional<{
     utm_term: string;
     ref: string;
     referral_url: string;
+    referral_code: string;
 }>;
 export declare type IframeTitle = string;
 interface TimelyWidgetProps {

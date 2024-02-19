@@ -127,7 +127,11 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
   }
 }
 
-const TimelyProvider: React.FC = ({ children }) => {
+type TimelyProviderProps = {
+  children?: React.ReactNode
+}
+
+const TimelyProvider: React.FC<TimelyProviderProps> = ({ children }) => {
   return (
     <Fragment>
       {children}

@@ -5,7 +5,7 @@ const App = () => {
   const handleClick = () => {
     const url = new URL(window.location.href)
     openPopupWidget({
-      url: 'http://localhost:3001/event/hotline/book',
+      url: 'https://test-timely.joinditto.in/event/ditto-hotline/book',
       utm: {
         utm_term: 'TestTerm',
         utm_campaign: 'TestCampaign',

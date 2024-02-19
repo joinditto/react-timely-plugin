@@ -23,6 +23,7 @@ export declare type Utm = Optional<{
     utm_term: string;
     ref: string;
     referral_url: string;
+    referral_code: string;
 }>;
 export declare type IframeTitle = string;
 interface TimelyWidgetProps {
@@ -32,7 +33,10 @@ interface TimelyWidgetProps {
     iframeTitle?: IframeTitle;
     embed?: Embed;
 }
-declare const TimelyProvider: React.FC;
+declare type TimelyProviderProps = {
+    children?: React.ReactNode;
+};
+declare const TimelyProvider: React.FC<TimelyProviderProps>;
 export { TimelyProvider };
 export declare const TimelyIframe: React.FC<TimelyWidgetProps>;
 export declare const openPopupWidget: (options: TimelyWidgetProps) => void;

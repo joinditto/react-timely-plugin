@@ -1,6 +1,30 @@
 import React__default, { createElement, useState, useEffect, Fragment } from 'react';
 import ReactModal from 'react-modal';
 
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+
+  _setPrototypeOf(subClass, superClass);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
 var _path;
 
 function _extends() {
@@ -31,7 +55,7 @@ function SvgCloseIcon(props) {
   })));
 }
 
-const customModalStylesMd = {
+var customModalStylesMd = {
   overlay: {
     top: 0,
     left: 0,
@@ -56,7 +80,7 @@ const customModalStylesMd = {
     overflow: 'hidden'
   }
 };
-const customModalStylesXs = {
+var customModalStylesXs = {
   overlay: {
     top: 0,
     left: 0,
@@ -79,7 +103,7 @@ const customModalStylesXs = {
     inset: '50px 0 0 0'
   }
 };
-const customModalStylesSm = {
+var customModalStylesSm = {
   overlay: {
     top: 0,
     left: 0,
@@ -104,7 +128,7 @@ const customModalStylesSm = {
     margin: 'auto'
   }
 };
-const styles = {
+var styles = {
   closeButtonMd: {
     position: 'fixed',
     top: '25px',
@@ -136,19 +160,22 @@ const styles = {
   }
 };
 
-const TimelyModal = ({
-  isOpen,
-  onClose,
-  closeBtn: _closeBtn = true,
-  children
-}) => {
-  const isBrowser = typeof window !== 'undefined';
-  const [viewport, setViewport] = useState({
+var TimelyModal = function TimelyModal(_ref) {
+  var isOpen = _ref.isOpen,
+      onClose = _ref.onClose,
+      _ref$closeBtn = _ref.closeBtn,
+      closeBtn = _ref$closeBtn === void 0 ? true : _ref$closeBtn,
+      children = _ref.children;
+  var isBrowser = typeof window !== 'undefined';
+
+  var _useState = useState({
     width: 0,
     height: 0
-  });
+  }),
+      viewport = _useState[0],
+      setViewport = _useState[1];
 
-  const handleViewportChange = () => {
+  var handleViewportChange = function handleViewportChange() {
     if (isBrowser) {
       setViewport({
         width: document.documentElement.clientWidth,
@@ -157,7 +184,7 @@ const TimelyModal = ({
     }
   };
 
-  useEffect(() => {
+  useEffect(function () {
     if (isBrowser) {
       window.addEventListener('resize', handleViewportChange);
       setViewport({
@@ -166,7 +193,7 @@ const TimelyModal = ({
       });
     }
 
-    return () => {
+    return function () {
       if (isBrowser) {
         window.removeEventListener('resize', handleViewportChange);
       }
@@ -175,19 +202,25 @@ const TimelyModal = ({
   return React__default.createElement(ReactModal, {
     isOpen: isOpen,
     style: viewport && viewport.width < 768 ? customModalStylesXs : viewport && viewport.width < 960 ? customModalStylesSm : customModalStylesMd,
-    overlayElement: (props, contentElement) => React__default.createElement("div", {
-      style: styles.overlay,
-      onClick: onClose
-    }, _closeBtn && React__default.createElement("div", {
-      style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
-      onClick: e => {
-        e.stopPropagation();
-        onClose();
-      }
-    }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement)),
+    overlayElement: function overlayElement(props, contentElement) {
+      return React__default.createElement("div", {
+        style: styles.overlay,
+        onClick: onClose
+      }, closeBtn && React__default.createElement("div", {
+        style: viewport && viewport.width < 960 ? styles.closeButtonXs : styles.closeButtonMd,
+        onClick: function onClick(e) {
+          e.stopPropagation();
+          onClose();
+        }
+      }, React__default.createElement(SvgCloseIcon, null)), React__default.createElement("div", Object.assign({}, props), contentElement));
+    },
     ariaHideApp: false,
-    onAfterOpen: () => document.body.style.overflow = 'hidden',
-    onAfterClose: () => document.body.style.overflow = 'unset'
+    onAfterOpen: function onAfterOpen() {
+      return document.body.style.overflow = 'hidden';
+    },
+    onAfterClose: function onAfterClose() {
+      return document.body.style.overflow = 'unset';
+    }
   }, children);
 };
 
@@ -340,46 +373,48 @@ function SvgLoader(props) {
   }))));
 }
 
-class TimelyWidget extends React__default.Component {
-  constructor(props) {
-    super(props);
+var TimelyWidget = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(TimelyWidget, _React$Component);
 
-    this.handleMessage = event => {
-      const {
-        data
-      } = event;
+  function TimelyWidget(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this;
+
+    _this.handleMessage = function (event) {
+      var data = event.data;
 
       if (data.from === 'timely') {
         if (data.action === 'confirm-close') {
-          this.setState({
+          _this.setState({
             isOpen: false,
             confirmClose: false
           });
         } else if (data.action === 'reset-confirmation') {
-          this.setState({
+          _this.setState({
             confirmClose: false
           });
         }
       }
     };
 
-    this.show = props => {
-      this.setState({
+    _this.show = function (props) {
+      _this.setState({
         isOpen: true,
         content: React__default.createElement(TimelyIframe, Object.assign({}, props))
       });
     };
 
-    this.close = () => {
-      if (!this.state.confirmClose && this.state.isOpen) {
-        this.setState({
+    _this.close = function () {
+      if (!_this.state.confirmClose && _this.state.isOpen) {
+        _this.setState({
           confirmClose: true
         });
 
         if (window && window.document) {
           var _window, _window$document;
 
-          const timelyIframe = (_window = window) === null || _window === void 0 ? void 0 : (_window$document = _window.document) === null || _window$document === void 0 ? void 0 : _window$document.getElementById('timely-iframe');
+          var timelyIframe = (_window = window) === null || _window === void 0 ? void 0 : (_window$document = _window.document) === null || _window$document === void 0 ? void 0 : _window$document.getElementById('timely-iframe');
 
           if (timelyIframe) {
             var _timelyIframe$content;
@@ -393,58 +428,67 @@ class TimelyWidget extends React__default.Component {
       }
     };
 
-    this.state = {
+    _this.state = {
       isOpen: false,
       content: null,
       confirmClose: false
     };
-    TimelyWidget.singletonRef = this;
+    TimelyWidget.singletonRef = _assertThisInitialized(_this);
+    return _this;
   }
 
-  componentDidMount() {
+  var _proto = TimelyWidget.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
     window.addEventListener('message', this.handleMessage, false);
-  }
+  };
 
-  componentWillUnmount() {
+  _proto.componentWillUnmount = function componentWillUnmount() {
     window.removeEventListener('message', this.handleMessage);
-  }
+  };
 
-  render() {
-    const {
-      isOpen
-    } = this.state;
+  _proto.render = function render() {
+    var isOpen = this.state.isOpen;
     return React__default.createElement(TimelyModal, {
       isOpen: isOpen,
       onClose: this.close,
       closeBtn: !this.state.confirmClose
     }, React__default.createElement(Fragment, null, this.state.content));
-  }
-
-}
-
-const TimelyProvider = ({
-  children
-}) => {
-  return React__default.createElement(Fragment, null, children, React__default.createElement(TimelyWidget, null));
-};
-const TimelyIframe = ({
-  url,
-  utm,
-  embed,
-  iframeTitle
-}) => {
-  const [loading, showLoader] = useState(true);
-
-  const formUrl = () => {
-    const queryStringIndex = url.indexOf('?');
-    const hasQueryString = queryStringIndex > -1;
-    const queryString = hasQueryString ? url.slice(queryStringIndex + 1) : null;
-    const baseUrl = hasQueryString ? url.slice(0, queryStringIndex) : url;
-    const updatedQueryString = [queryString, utm ? Object.keys(utm).map(utmParam => `${utmParam}=${utm[utmParam]}`).join('&') : null, embed ? Object.keys(embed).map(embedProp => `${embedProp}=${embed[embedProp]}`).join('&') : null].filter(item => item !== null).join('&');
-    return `${baseUrl}?${updatedQueryString}`;
   };
 
-  const finalUrl = formUrl();
+  return TimelyWidget;
+}(React__default.Component);
+
+var TimelyProvider = function TimelyProvider(_ref) {
+  var children = _ref.children;
+  return React__default.createElement(Fragment, null, children, React__default.createElement(TimelyWidget, null));
+};
+var TimelyIframe = function TimelyIframe(_ref2) {
+  var url = _ref2.url,
+      utm = _ref2.utm,
+      embed = _ref2.embed,
+      iframeTitle = _ref2.iframeTitle;
+
+  var _useState = useState(true),
+      loading = _useState[0],
+      showLoader = _useState[1];
+
+  var formUrl = function formUrl() {
+    var queryStringIndex = url.indexOf('?');
+    var hasQueryString = queryStringIndex > -1;
+    var queryString = hasQueryString ? url.slice(queryStringIndex + 1) : null;
+    var baseUrl = hasQueryString ? url.slice(0, queryStringIndex) : url;
+    var updatedQueryString = [queryString, utm ? Object.keys(utm).map(function (utmParam) {
+      return utmParam + "=" + utm[utmParam];
+    }).join('&') : null, embed ? Object.keys(embed).map(function (embedProp) {
+      return embedProp + "=" + embed[embedProp];
+    }).join('&') : null].filter(function (item) {
+      return item !== null;
+    }).join('&');
+    return baseUrl + "?" + updatedQueryString;
+  };
+
+  var finalUrl = formUrl();
   return React__default.createElement("div", {
     style: {
       width: '100%',
@@ -477,14 +521,16 @@ const TimelyIframe = ({
     width: '100%',
     height: '100%',
     title: iframeTitle ? iframeTitle : 'Ditto Timely',
-    onLoad: () => showLoader(false),
+    onLoad: function onLoad() {
+      return showLoader(false);
+    },
     allowTransparency: true,
     style: {
       visibility: loading ? 'hidden' : 'visible'
     }
   }));
 };
-const openPopupWidget = options => {
+var openPopupWidget = function openPopupWidget(options) {
   TimelyWidget.singletonRef.show(options);
 };
 

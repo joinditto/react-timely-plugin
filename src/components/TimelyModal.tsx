@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
 
 import { ReactComponent as CloseIcon } from '../assets/close-icon.svg'
@@ -7,7 +7,7 @@ export interface StylesDictionary {
   [Key: string]: React.CSSProperties
 }
 
-interface TimelyModalProps {
+interface TimelyModalProps extends PropsWithChildren {
   isOpen: boolean
   closeBtn?: boolean
   onClose: () => void
@@ -130,7 +130,7 @@ const TimelyModal: React.FC<TimelyModalProps> = ({
 }) => {
   const isBrowser = typeof window !== 'undefined'
 
-  const [viewport, setViewport] = useState<{ width: Number; height: number }>({
+  const [viewport, setViewport] = useState<{ width: number; height: number }>({
     width: 0,
     height: 0
   })

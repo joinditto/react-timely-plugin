@@ -160,12 +160,14 @@ export const TimelyIframe: React.FC<TimelyWidgetProps> = ({
       queryString,
       utm
         ? Object.keys(utm)
-            .map((utmParam) => `${utmParam}=${utm[utmParam]}`)
+            .map((utmParam) => `${utmParam}=${utm[utmParam as keyof Utm]}`)
             .join('&')
         : null,
       embed
         ? Object.keys(embed)
-            .map((embedProp) => `${embedProp}=${embed[embedProp]}`)
+            .map(
+              (embedProp) => `${embedProp}=${embed[embedProp as keyof Embed]}`
+            )
             .join('&')
         : null
     ]
@@ -215,7 +217,7 @@ export const TimelyIframe: React.FC<TimelyWidgetProps> = ({
         frameBorder={0}
         width='100%'
         height='100%'
-        title={iframeTitle ? iframeTitle : 'Ditto Timely'}
+        title={iframeTitle ?? 'Ditto Timely'}
         onLoad={() => showLoader(false)}
         allowTransparency={true}
         style={{ visibility: loading ? 'hidden' : 'visible' }}

@@ -7,47 +7,37 @@ var ReactModal = _interopDefault(require('react-modal'));
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
-
   _setPrototypeOf(subClass, superClass);
 }
-
 function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
-
   return _setPrototypeOf(o, p);
 }
-
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
-
   return self;
 }
 
 var _path;
-
 function _extends() {
-  _extends = Object.assign || function (target) {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends.apply(this, arguments);
 }
-
 function SvgCloseIcon(props) {
   return /*#__PURE__*/React.createElement("svg", _extends({
     xmlns: "http://www.w3.org/2000/svg",
@@ -162,22 +152,19 @@ var styles = {
     left: 0
   }
 };
-
 var TimelyModal = function TimelyModal(_ref) {
   var isOpen = _ref.isOpen,
-      onClose = _ref.onClose,
-      _ref$closeBtn = _ref.closeBtn,
-      closeBtn = _ref$closeBtn === void 0 ? true : _ref$closeBtn,
-      children = _ref.children;
+    onClose = _ref.onClose,
+    _ref$closeBtn = _ref.closeBtn,
+    closeBtn = _ref$closeBtn === void 0 ? true : _ref$closeBtn,
+    children = _ref.children;
   var isBrowser = typeof window !== 'undefined';
-
   var _useState = React.useState({
-    width: 0,
-    height: 0
-  }),
-      viewport = _useState[0],
-      setViewport = _useState[1];
-
+      width: 0,
+      height: 0
+    }),
+    viewport = _useState[0],
+    setViewport = _useState[1];
   var handleViewportChange = function handleViewportChange() {
     if (isBrowser) {
       setViewport({
@@ -186,7 +173,6 @@ var TimelyModal = function TimelyModal(_ref) {
       });
     }
   };
-
   React.useEffect(function () {
     if (isBrowser) {
       window.addEventListener('resize', handleViewportChange);
@@ -195,7 +181,6 @@ var TimelyModal = function TimelyModal(_ref) {
         height: document.documentElement.clientHeight
       });
     }
-
     return function () {
       if (isBrowser) {
         window.removeEventListener('resize', handleViewportChange);
@@ -228,25 +213,20 @@ var TimelyModal = function TimelyModal(_ref) {
 };
 
 var _circle, _circle2, _circle3, _circle4, _circle5;
-
 function _extends$1() {
-  _extends$1 = Object.assign || function (target) {
+  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
-
       for (var key in source) {
         if (Object.prototype.hasOwnProperty.call(source, key)) {
           target[key] = source[key];
         }
       }
     }
-
     return target;
   };
-
   return _extends$1.apply(this, arguments);
 }
-
 function SvgLoader(props) {
   return /*#__PURE__*/React.createElement("svg", _extends$1({
     xmlns: "http://www.w3.org/2000/svg",
@@ -378,15 +358,11 @@ function SvgLoader(props) {
 
 var TimelyWidget = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(TimelyWidget, _React$Component);
-
   function TimelyWidget(props) {
     var _this;
-
     _this = _React$Component.call(this, props) || this;
-
     _this.handleMessage = function (event) {
       var data = event.data;
-
       if (data.from === 'timely') {
         if (data.action === 'confirm-close') {
           _this.setState({
@@ -400,28 +376,22 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
         }
       }
     };
-
     _this.show = function (props) {
       _this.setState({
         isOpen: true,
         content: React__default.createElement(TimelyIframe, Object.assign({}, props))
       });
     };
-
     _this.close = function () {
       if (!_this.state.confirmClose && _this.state.isOpen) {
         _this.setState({
           confirmClose: true
         });
-
         if (window && window.document) {
           var _window, _window$document;
-
           var timelyIframe = (_window = window) === null || _window === void 0 ? void 0 : (_window$document = _window.document) === null || _window$document === void 0 ? void 0 : _window$document.getElementById('timely-iframe');
-
           if (timelyIframe) {
             var _timelyIframe$content;
-
             (_timelyIframe$content = timelyIframe.contentWindow) === null || _timelyIframe$content === void 0 ? void 0 : _timelyIframe$content.postMessage({
               from: 'react-timely',
               action: 'close'
@@ -430,7 +400,6 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
         }
       }
     };
-
     _this.state = {
       isOpen: false,
       content: null,
@@ -439,17 +408,13 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
     TimelyWidget.singletonRef = _assertThisInitialized(_this);
     return _this;
   }
-
   var _proto = TimelyWidget.prototype;
-
   _proto.componentDidMount = function componentDidMount() {
     window.addEventListener('message', this.handleMessage, false);
   };
-
   _proto.componentWillUnmount = function componentWillUnmount() {
     window.removeEventListener('message', this.handleMessage);
   };
-
   _proto.render = function render() {
     var isOpen = this.state.isOpen;
     return React__default.createElement(TimelyModal, {
@@ -458,24 +423,20 @@ var TimelyWidget = /*#__PURE__*/function (_React$Component) {
       closeBtn: !this.state.confirmClose
     }, React__default.createElement(React.Fragment, null, this.state.content));
   };
-
   return TimelyWidget;
 }(React__default.Component);
-
 var TimelyProvider = function TimelyProvider(_ref) {
   var children = _ref.children;
   return React__default.createElement(React.Fragment, null, children, React__default.createElement(TimelyWidget, null));
 };
 var TimelyIframe = function TimelyIframe(_ref2) {
   var url = _ref2.url,
-      utm = _ref2.utm,
-      embed = _ref2.embed,
-      iframeTitle = _ref2.iframeTitle;
-
+    utm = _ref2.utm,
+    embed = _ref2.embed,
+    iframeTitle = _ref2.iframeTitle;
   var _useState = React.useState(true),
-      loading = _useState[0],
-      showLoader = _useState[1];
-
+    loading = _useState[0],
+    showLoader = _useState[1];
   var formUrl = function formUrl() {
     var queryStringIndex = url.indexOf('?');
     var hasQueryString = queryStringIndex > -1;
@@ -490,7 +451,6 @@ var TimelyIframe = function TimelyIframe(_ref2) {
     }).join('&');
     return baseUrl + "?" + updatedQueryString;
   };
-
   var finalUrl = formUrl();
   return React__default.createElement("div", {
     style: {
@@ -523,7 +483,7 @@ var TimelyIframe = function TimelyIframe(_ref2) {
     frameBorder: 0,
     width: '100%',
     height: '100%',
-    title: iframeTitle ? iframeTitle : 'Ditto Timely',
+    title: iframeTitle != null ? iframeTitle : 'Ditto Timely',
     onLoad: function onLoad() {
       return showLoader(false);
     },

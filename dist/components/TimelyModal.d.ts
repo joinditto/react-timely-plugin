@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 export interface StylesDictionary {
     [Key: string]: React.CSSProperties;
 }
-interface TimelyModalProps {
+interface TimelyModalProps extends PropsWithChildren {
     isOpen: boolean;
     closeBtn?: boolean;
     onClose: () => void;

@@ -1,10 +1,9 @@
 {
-  "name": "react-timely",
+  "name": "@ditto-insurance/react-timely",
   "version": "1.0.1",
-  "description": "Load ditto timely scheduler from any site",
-  "author": "",
+  "description": "Load ditto timely scheduler from any react site",
+  "author": "joinditto",
   "license": "MIT",
-  "repository": "/react-timely",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
@@ -64,5 +63,8 @@
   ],
   "dependencies": {
     "react-modal": "^3.14.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

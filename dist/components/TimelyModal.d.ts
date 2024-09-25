@@ -4,6 +4,7 @@ export interface StylesDictionary {
 }
 interface TimelyModalProps extends PropsWithChildren {
     isOpen: boolean;
+    children: React.ReactNode;
     closeBtn?: boolean;
     onClose: () => void;
 }

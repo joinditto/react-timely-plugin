@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react'
-import TimelyModal from './components/TimelyModal'
+
 import { ReactComponent as Loader } from './assets/loader.svg'
+import TimelyModal from './components/TimelyModal'
 
 type Optional<T extends object> = {
   [P in keyof T]?: T[P]
@@ -45,7 +46,6 @@ interface TimelyWidgetProps {
 interface TimelyWidgetState {
   isOpen: boolean
   content: JSX.Element | null
-  confirmClose: boolean
 }
 
 class TimelyWidget extends React.Component<any, TimelyWidgetState> {
@@ -56,8 +56,7 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
 
     this.state = {
       isOpen: false,
-      content: null,
-      confirmClose: false
+      content: null
     }
 
     TimelyWidget.singletonRef = this
@@ -71,9 +70,7 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
     const { data } = event
     if (data.from === 'timely') {
       if (data.action === 'confirm-close') {
-        this.setState({ isOpen: false, confirmClose: false })
-      } else if (data.action === 'reset-confirmation') {
-        this.setState({ confirmClose: false })
+        this.setState({ isOpen: false })
       }
     }
   }
@@ -96,18 +93,16 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
   }
 
   close = () => {
-    if (!this.state.confirmClose && this.state.isOpen) {
-      this.setState({ confirmClose: true })
-      if (window && window.document) {
-        const timelyIframe: HTMLIFrameElement | null =
-          window?.document?.getElementById('timely-iframe') as HTMLIFrameElement
+    this.setState({ isOpen: false })
+    if (window && window.document) {
+      const timelyIframe: HTMLIFrameElement | null =
+        window?.document?.getElementById('timely-iframe') as HTMLIFrameElement
 
-        if (timelyIframe) {
-          timelyIframe.contentWindow?.postMessage(
-            { from: 'react-timely', action: 'close' },
-            '*'
-          )
-        }
+      if (timelyIframe) {
+        timelyIframe.contentWindow?.postMessage(
+          { from: 'react-timely', action: 'close' },
+          '*'
+        )
       }
     }
   }
@@ -116,11 +111,7 @@ class TimelyWidget extends React.Component<any, TimelyWidgetState> {
     const { isOpen } = this.state
 
     return (
-      <TimelyModal
-        isOpen={isOpen}
-        onClose={this.close}
-        closeBtn={!this.state.confirmClose}
-      >
+      <TimelyModal isOpen={isOpen} onClose={this.close}>
         <Fragment>{this.state.content}</Fragment>
       </TimelyModal>
     )
@@ -219,6 +210,7 @@ export const TimelyIframe: React.FC<TimelyWidgetProps> = ({
         height='100%'
         title={iframeTitle ?? 'Ditto Timely'}
         onLoad={() => showLoader(false)}
+        // eslint-disable-next-line react/no-unknown-property
         allowTransparency={true}
         style={{ visibility: loading ? 'hidden' : 'visible' }}
       />

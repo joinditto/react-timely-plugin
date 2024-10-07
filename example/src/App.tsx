@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TimelyProvider, openPopupWidget } from 'react-timely'
 
 const App = () => {
@@ -24,6 +24,22 @@ const App = () => {
       }
     })
   }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const listener = (event: any) => {
+      if (event.data?.from !== 'timely–link') return
+      window.location.href = event.data.action
+    }
+
+    window.addEventListener('message', listener, false)
+
+    return () => {
+      window.removeEventListener('message', listener)
+    }
+  }, [])
+
   return (
     <TimelyProvider>
       <div

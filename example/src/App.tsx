@@ -30,7 +30,7 @@ const App = () => {
 
     const listener = (event: any) => {
       if (event.data?.from !== 'timely–link') return
-      window.location.href = event.data.action
+      window.open(event.data.action, '_blank')
     }
 
     window.addEventListener('message', listener, false)

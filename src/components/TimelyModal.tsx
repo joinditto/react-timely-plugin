@@ -1,8 +1,6 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
 
-import { ReactComponent as CloseIcon } from '../assets/close-icon.svg'
-
 export interface StylesDictionary {
   [Key: string]: React.CSSProperties
 }
@@ -90,44 +88,7 @@ const customModalStylesSm = {
   }
 }
 
-const styles: StylesDictionary = {
-  closeButtonMd: {
-    position: 'fixed',
-    top: '25px',
-    right: '25px',
-    width: '19px',
-    height: '19px',
-    cursor: 'pointer',
-    color: '#fff',
-    backgroundSize: 'contain',
-    zIndex: 10000
-  },
-  closeButtonXs: {
-    position: 'fixed',
-    top: '10px',
-    right: '10px',
-    width: '15px',
-    height: '15px',
-    cursor: 'pointer',
-    color: '#fff',
-    backgroundSize: 'contain',
-    zIndex: 10000
-  },
-  overlay: {
-    width: '100vw',
-    height: '100vh',
-    position: 'absolute',
-    top: 0,
-    left: 0
-  }
-}
-
-const TimelyModal: React.FC<TimelyModalProps> = ({
-  isOpen,
-  onClose,
-  closeBtn = true,
-  children
-}) => {
+const TimelyModal: React.FC<TimelyModalProps> = ({ isOpen, children }) => {
   const isBrowser = typeof window !== 'undefined'
 
   const [viewport, setViewport] = useState<{ width: number; height: number }>({
@@ -169,26 +130,6 @@ const TimelyModal: React.FC<TimelyModalProps> = ({
           ? customModalStylesSm
           : customModalStylesMd
       }
-      overlayElement={(props, contentElement) => (
-        <div style={styles.overlay} onClick={onClose}>
-          {closeBtn && (
-            <div
-              style={
-                viewport && viewport.width < 960
-                  ? styles.closeButtonXs
-                  : styles.closeButtonMd
-              }
-              onClick={(e) => {
-                e.stopPropagation()
-                onClose()
-              }}
-            >
-              <CloseIcon />
-            </div>
-          )}
-          <div {...props}>{contentElement}</div>
-        </div>
-      )}
       ariaHideApp={false}
       onAfterOpen={() => (document.body.style.overflow = 'hidden')}
       onAfterClose={() => (document.body.style.overflow = 'unset')}

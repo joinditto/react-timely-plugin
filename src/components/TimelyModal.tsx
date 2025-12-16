@@ -30,7 +30,7 @@ const customModalStylesMd = {
     minWidth: '900px',
     maxWidth: '1060px',
     height: '100%',
-    maxHeight: '620px',
+    maxHeight: '680px',
     padding: 0,
     background: 'transparent',
     border: 'none',

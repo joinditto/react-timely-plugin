@@ -31,6 +31,16 @@ export type Utm = Optional<{
   ref: string
   referral_url: string
   referral_code: string
+  gclid: string
+  gbraid: string
+  wbraid: string
+  dclid: string
+  msclkid: string
+  fbclid: string
+  ttclid: string
+  li_fat_id: string
+  ScCid: string
+  [key: string]: string
 }>
 
 export type IframeTitle = string
